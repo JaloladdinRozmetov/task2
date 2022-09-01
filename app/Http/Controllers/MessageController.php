@@ -35,11 +35,11 @@ class MessageController extends Controller
                 'user_name'=>$request->user_name
             ]);
             $this->sendMessage($request->toArray());
-            return \response()->json(['success'=>'Ваще данные отправлены!']);
+            return redirect()->back()->with('message','Ваще данные отправлены !');
 
         } catch (\Exception $e) {
 
-            return \response()->json(['error'=>$e->getMessage()]);
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 

@@ -28,7 +28,7 @@
             <div class="alert alert-success" role="alert" id="successMsg" style="display: none">
                 Thank you for getting in touch!
             </div>
-            <form id="SubmitForm">
+            <form id="SubmitForm" method="POST" action="{{route('message-store')}}">
                 @csrf
                 <div class="mb-3">
                     <label for="InputName" class="form-label">Name</label>
@@ -52,42 +52,5 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-
-<script type="text/javascript">
-
-    $('#SubmitForm').on('submit',function(e){
-        e.preventDefault();
-        $.ajaxSetup({
-            beforeSend: function(xhr, type) {
-                if (!type.crossDomain) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-                }
-            },
-        });
-        let user_name = $('#InputName').val();
-        let email = $('#InputEmail').val();
-        let phone_number = $('#InputMobile').val();
-        $.ajax({
-            url: "/message",
-            type:"POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "application/json",
-            data:{
-                _token: "{{ csrf_token() }}",
-                user_name:user_name,
-                email:email,
-                phone_number:phone_number,
-            },
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (data, textStatus, errorThrown) {
-                console.log(data);
-
-            },
-        });
-    });
-</script>
 </body>
 </html>
