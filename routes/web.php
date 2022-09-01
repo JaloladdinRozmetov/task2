@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('message');
+//});
+
+
+Route::get('/',[App\Http\Controllers\MessageController::class,'index'])->name('index');
+Route::post('/message',[App\Http\Controllers\MessageController::class,'store'])->name('message-store');
